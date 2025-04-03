@@ -35,12 +35,14 @@ def create_project_structure(project_name: str) -> bool:
             "README.md",
             # env config
             ".env",
-            "config/env_manager.py",
-            "config/set_config.py",
+            "env_config/__init__.py",
+            "env_config/env_manager.py",
+            "env_config/set_config.py",
             # logs
             f"logs/",
             # data folder
             f"{data_folder_name}",
+            f"{data_folder_name}/download_link.md",
             # src folder
             f"src/__init__.py",
             f"src/{project_name}/__init__.py",
@@ -56,6 +58,19 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/utils/utils.py",
             # constants
             f"src/{project_name}/constants/__init__.py",
+            # config
+            f"src/{project_name}/config/__init__.py",
+            f"src/{project_name}/config/configuration.py",
+            # entity
+            f"src/{project_name}/entity/__init__.py",
+            f"src/{project_name}/entity/config_entity.py",
+            f"src/{project_name}/entity/artifact_entity.py",
+            # components
+            f"src/{project_name}/components/__init__.py",
+            f"src/{project_name}/components/data_ingestion.py",
+            # pipeline
+            f"src/{project_name}/pipeline/__init__.py",
+            f"src/{project_name}/pipeline/data_ingestion.py",
             # main
             "main.py",
             # clean

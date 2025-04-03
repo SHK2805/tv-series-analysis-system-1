@@ -2,3 +2,4 @@ setuptools
 typing-extensions
 python-dotenv
 pathlib
+requests

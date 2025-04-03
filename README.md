@@ -7,3 +7,16 @@
   * A transcript dataset
   * A classification dataset
 * In this project, we are choosing the TV series "Naruto" dataset.
+
+### Steps
+#### Coding steps
+* Constants
+* Config
+  * Configuration
+* Entity
+  * Config Entity
+* Entity
+  * Artifact Entity
+* Components
+* Pipeline
+* Main

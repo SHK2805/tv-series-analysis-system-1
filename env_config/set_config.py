@@ -1,5 +1,6 @@
 import os
-from config.env_manager import groq_api_key
+from env_config.env_manager import groq_api_key
+
 
 # this gets the key-values from the .env file and sets the environment
 class Config:
