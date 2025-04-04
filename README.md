@@ -29,3 +29,21 @@ pip install scrapy
 * Components
 * Pipeline
 * Main
+
+## Theme Classification
+* For a given theme like friendship, love, hope, betrayal, etc. the system will give how much that theme is present in the series using the subtitles.
+* We use `Zero-Shot Classification` for this.
+
+#### Zero-Shot Classification
+* In NLP, a **zero-shot classifier** is a model capable of classifying text into categories it hasn't been explicitly trained on, using natural language descriptions of the target labels to generalize new tasks.
+* Zero-shot classification is powerful for tasks lacking labeled data, as it enables models to adapt using pre-existing knowledge.
+* We are using the `Hugging Face` library for this.
+
+##### Inputs:
+* **Input Text**: The text you want to classify (e.g., "The movie was fantastic!").
+* **Candidate Labels**: Categories for classification (e.g., ["positive," "negative," "neutral"]).
+* *(Optional)* **Hypothesis Template**: A phrase linking text to labels, such as "This text is about {}."
+
+##### Outputs:
+* **Predicted Label**: The most relevant label for the text.
+* **Confidence Scores**: Likelihoods for each label (e.g., {"positive": 0.85, "neutral": 0.10, "negative": 0.05}).

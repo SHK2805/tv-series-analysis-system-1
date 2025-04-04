@@ -5,3 +5,8 @@ pathlib
 requests
 scrapy
 beautifulsoup4
+transformers
+huggingface-hub
+nltk
+bs4
+torch

@@ -59,6 +59,10 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/utils/__init__.py",
             f"src/{project_name}/utils/delete_directories.py",
             f"src/{project_name}/utils/utils.py",
+            f"src/{project_name}/utils/kaggle_dataset_downloader.py",
+            f"src/{project_name}/utils/zip_downloader.py",
+            f"src/{project_name}/utils/theme_classifier/__init__.py",
+            f"src/{project_name}/utils/theme_classifier/theme_classifier.py",
             # constants
             f"src/{project_name}/constants/__init__.py",
             # config
