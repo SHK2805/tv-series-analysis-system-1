@@ -1,3 +1,4 @@
+pandas
 setuptools
 typing-extensions
 python-dotenv

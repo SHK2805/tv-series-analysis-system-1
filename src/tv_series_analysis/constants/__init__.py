@@ -25,3 +25,9 @@ data_ingestion_subtitles_url="https://subtitlist.com/subs/naruto-season-1/englis
 data_validation_dir_name: str = "data_validation"
 data_validation_status_file_name: str = "status.txt"
 
+# DATA TRANSFORMATION CONSTANTS
+data_transformation_dir_name: str = "data_transformation"
+data_transformation_transformed_subtitles_folder: str = "transformed_subtitles"
+data_transformation_transformed_subtitles_file_name: str = "transformed_subtitles.csv"
+
+

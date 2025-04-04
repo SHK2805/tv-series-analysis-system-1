@@ -15,7 +15,7 @@ class DataValidationTrainingPipeline:
         self.data_ingestion_artifact = data_ingestion_artifact
 
     def data_validation(self) -> DataValidationArtifact:
-        tag: str = f"{self.class_name}::data_validation::"
+        tag: str = f"[{self.class_name}]::[data_validation]::"
         try:
             config: TrainingPipelineConfig = TrainingPipelineConfig()
             logger.info(f"{tag}::Configuration object created")

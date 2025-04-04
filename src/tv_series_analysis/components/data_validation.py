@@ -18,7 +18,7 @@ class DataValidation:
             raise CustomException(e, sys)
 
     def validate_subtitles(self) -> bool:
-        tag: str = f"{self.class_name}::validate_subtitles::"
+        tag: str = f"[{self.class_name}]::[validate_subtitles]::"
         try:
             logger.info(f"{tag}::Validating subtitles")
             if os.path.exists(self.data_validation_config.subtitles_dir_path):
@@ -42,7 +42,7 @@ class DataValidation:
             raise CustomException(e, sys)
 
     def validate_transcripts(self) -> bool:
-        tag: str = f"{self.class_name}::validate_transcripts::"
+        tag: str = f"[{self.class_name}]::[validate_transcripts]::"
         try:
            # check the transcript file exists
             if os.path.exists(self.data_validation_config.transcripts_file_path):
@@ -58,7 +58,7 @@ class DataValidation:
             raise CustomException(e, sys)
 
     def validate_jutsus(self) -> bool:
-        tag: str = f"{self.class_name}::validate_jutsus::"
+        tag: str = f"[{self.class_name}]::[validate_jutsus]::"
         try:
             # check the jutsus file exists
             if os.path.exists(self.data_validation_config.jutsus_file_path):
@@ -74,7 +74,7 @@ class DataValidation:
             raise CustomException(e, sys)
 
     def initiate_data_validation(self) -> DataValidationArtifact:
-        tag: str = f"{self.class_name}::initiate_data_validation::"
+        tag: str = f"[{self.class_name}]::[initiate_data_validation]::"
         try:
             status = False
             logger.info(f"{tag}::Initiating data validation")

@@ -1,10 +1,12 @@
 import sys
 
 from env_config.set_config import Config
-from src.tv_series_analysis.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact
+from src.tv_series_analysis.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact, \
+    DataTransformationArtifact
 from src.tv_series_analysis.exception.exception import CustomException
 from src.tv_series_analysis.logging.logger import logger
 from src.tv_series_analysis.pipeline.data_ingestion import DataIngestionTrainingPipeline
+from src.tv_series_analysis.pipeline.data_transformation import DataTransformationTrainingPipeline
 from src.tv_series_analysis.pipeline.data_validation import DataValidationTrainingPipeline
 
 
@@ -13,7 +15,7 @@ class RunPipeline:
         self.class_name = self.__class__.__name__
 
     def run_data_ingestion_pipeline(self) -> DataIngestionArtifact:
-        tag: str = f"{self.class_name}::run_data_ingestion_pipeline::"
+        tag: str = f"[{self.class_name}]::[run_data_ingestion_pipeline]::"
         try:
             data_ingestion_pipeline: DataIngestionTrainingPipeline = DataIngestionTrainingPipeline()
             logger.info(f"[STARTED]>>>>>>>>>>>>>>>>>>>> {data_ingestion_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<")
@@ -28,7 +30,7 @@ class RunPipeline:
             raise CustomException(e, sys)
 
     def run_data_validation_pipeline(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
-        tag: str = f"{self.class_name}::run_data_validation_pipeline::"
+        tag: str = f"[{self.class_name}]::[run_data_validation_pipeline]::"
         try:
             data_validation_pipeline: DataValidationTrainingPipeline = DataValidationTrainingPipeline(
                 data_ingestion_artifact)
@@ -43,12 +45,31 @@ class RunPipeline:
             logger.error(f"{tag}::Error running the data validation pipeline: {e}")
             raise CustomException(e, sys)
 
+    def run_data_transformation_pipeline(self, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
+        tag: str = f"[{self.class_name}]::[run_data_transformation_pipeline]::"
+        try:
+            data_transformation_pipeline: DataTransformationTrainingPipeline = DataTransformationTrainingPipeline(
+                data_validation_artifact)
+            logger.info(f"[STARTED]>>>>>>>>>>>>>>>>>>>> {data_transformation_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<")
+            logger.info(f"{tag}::Running the data transformation pipeline")
+            data_transformation_artifact = data_transformation_pipeline.data_transformation()
+            logger.info(f"{tag}::Data transformation pipeline completed")
+            logger.info(
+                f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {data_transformation_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
+            return data_transformation_artifact
+        except Exception as e:
+            logger.error(f"{tag}::Error running the data transformation pipeline: {e}")
+            raise CustomException(e, sys)
+
 
     def run(self) -> None:
         data_ingestion_artifact: DataIngestionArtifact = self.run_data_ingestion_pipeline()
         # logger.info(f"Data Ingestion Artifact: {data_ingestion_artifact}")
         data_validation_artifact: DataValidationArtifact = self.run_data_validation_pipeline(data_ingestion_artifact)
         # logger.info(f"Data Validation Artifact: {data_validation_artifact}")
+        data_transformation_artifact: DataTransformationArtifact = self.run_data_transformation_pipeline(data_validation_artifact)
+        logger.info(f"Data Transformation Artifact: {data_transformation_artifact}")
+
 
 if __name__ == "__main__":
     try:

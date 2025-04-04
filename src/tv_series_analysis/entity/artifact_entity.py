@@ -11,3 +11,7 @@ class DataIngestionArtifact:
 class DataValidationArtifact:
     validation_status: bool
     validation_status_file_path: str
+
+@dataclass
+class DataTransformationArtifact:
+    transformed_subtitles_file_path: str

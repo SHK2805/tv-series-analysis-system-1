@@ -27,7 +27,13 @@ pip install scrapy
 * Entity
   * Artifact Entity
 * Components
+  * Data Ingestion
+  * Data Validation
+  * Data Classification
 * Pipeline
+  * Data Ingestion
+  * Data Validation
+  * Data Classification
 * Main
 
 ## Theme Classification
@@ -47,3 +53,15 @@ pip install scrapy
 ##### Outputs:
 * **Predicted Label**: The most relevant label for the text.
 * **Confidence Scores**: Likelihoods for each label (e.g., {"positive": 0.85, "neutral": 0.10, "negative": 0.05}).
+
+## Data Formats
+#### Subtitles
+* The subtitles are in the `.ass` format.
+* The first **27** lines of the file are metadata.
+* The subtitles are in the format:
+```plaintext
+Dialogue: 0,0:00:05.95,0:00:11.99,Default,,0000,0000,0000,,<text>
+Dialogue: 0,0:00:11.99,0:00:17.99,Default,,0000,0000,0000,,<text>
+```
+* The text is in the last part of the line that we need to extract.
+* We use regex and python to extract the text from the subtitles.
