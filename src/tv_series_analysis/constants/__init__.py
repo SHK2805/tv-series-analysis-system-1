@@ -1,13 +1,27 @@
 import os
 #  NAMES
-pipeline_name = "tv_series_analysis"
+pipeline_name:str = "tv_series_analysis"
+artifact_dir: str = "artifacts"
 
 # DATA CONSTANTS
-data_file_folder_name:str="data"
+data_folder_name:str="data"
+subtitles_dir_name: str = "subtitles"
+subtitles_file_count: int = 220
+kaggle_transcripts_name="leonzatrax/naruto-ep-1-transcript"
+transcripts_dir_name: str = "transcripts"
+transcripts_file_name: str = "naruto.csv"
+transcripts_file_count: int = 1
+jutsus_dir_name: str = "jutsus"
+jutsus_file_name: str = "jutsus.jsonl"
+jutsus_file_count: int = 1
+
+
 
 # DATA INGESTION CONSTANTS
-data_ingestion_dir_name: str = data_file_folder_name
+data_ingestion_dir_name: str = data_folder_name
 data_ingestion_subtitles_url="https://subtitlist.com/subs/naruto-season-1/english/2206507"
-data_ingestion_subtitles_dir_name: str = "subtitles"
-data_ingestion_kaggle_transcripts_name="leonzatrax/naruto-ep-1-transcript"
-data_ingestion_transcripts_dir_name: str = "transcripts"
+
+# DATA VALIDATION CONSTANTS
+data_validation_dir_name: str = "data_validation"
+data_validation_status_file_name: str = "status.txt"
+

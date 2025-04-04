@@ -1,6 +1,7 @@
 import os
 import sys
 
+from src.tv_series_analysis.constants import transcripts_file_name, jutsus_file_name
 from src.tv_series_analysis.entity.artifact_entity import DataIngestionArtifact
 from src.tv_series_analysis.entity.config_entity import DataIngestionConfig
 from src.tv_series_analysis.exception.exception import CustomException
@@ -20,12 +21,12 @@ class DataIngestion:
         try:
             logger.info(f"{tag}::started.")
             zip_downloader = ZipDownloader(self.config.data_ingestion_subtitles_url,
-                                           self.config.data_ingestion_subtitles_dir)
+                                           self.config.data_ingestion_subtitles_dir_path)
             zip_downloader.download_and_extract()
             logger.info(f"{tag}::downloaded from {self.config.data_ingestion_subtitles_url} "
-                        f"and extracted subtitles to {self.config.data_ingestion_subtitles_dir}.")
+                        f"and extracted subtitles to {self.config.data_ingestion_subtitles_dir_path}.")
             logger.info(f"{tag}::complete.")
-            return self.config.data_ingestion_subtitles_dir
+            return self.config.data_ingestion_subtitles_dir_path
         except Exception as e:
             message:str = f"{tag}::Error occurred: {e}"
             logger.error(message)
@@ -40,12 +41,11 @@ class DataIngestion:
 
             # Download and extract Titanic dataset
             downloader.download_and_extract(self.config.data_ingestion_kaggle_transcripts_name,
-                                            output_dir=self.config.data_ingestion_transcripts_dir_name)
+                                            output_dir=self.config.data_ingestion_transcripts_dir_path)
 
-            logger.info(f"{tag}::downloaded from {self.config.data_ingestion_subtitles_url} "
-                        f"and extracted subtitles to {self.config.data_ingestion_subtitles_dir}.")
+            logger.info(f"{tag}::Extracted transcripts to {self.config.data_ingestion_transcripts_dir_path}.")
             logger.info(f"{tag}::complete.")
-            return self.config.data_ingestion_subtitles_dir
+            return self.config.data_ingestion_subtitles_dir_path
         except Exception as e:
             message:str = f"{tag}::Error occurred: {e}"
             logger.error(message)
@@ -63,7 +63,10 @@ class DataIngestion:
                         f"Instead, I have downloaded them MANUALLY for better control and convenience."
                         f"**********")
             logger.info(f"{tag}::complete.")
-            return DataIngestionArtifact(self.config.data_ingestion_subtitles_dir)
+            subtitles_dir_path = self.config.data_ingestion_subtitles_dir_path
+            transcripts_file_path = os.path.join(self.config.data_ingestion_transcripts_dir_path, transcripts_file_name)
+            jutsus_file_path = os.path.join(self.config.data_ingestion_jutsus_dir_name, jutsus_file_name)
+            return DataIngestionArtifact(subtitles_dir_path, transcripts_file_path, jutsus_file_path)
         except Exception as e:
             message:str = f"{tag}::Error occurred: {e}"
             logger.error(message)

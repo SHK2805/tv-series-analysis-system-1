@@ -9,4 +9,5 @@ class TrainingPipelineConfig:
         self.class_name = self.__class__.__name__
         self.timestamp = timestamp
         self.pipeline = pipeline_name
-        self.data_dir = data_file_folder_name
+        self.artifact_name = artifact_dir
+        self.artifact_dir = os.path.join(self.artifact_name, timestamp)

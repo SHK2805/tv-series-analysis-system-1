@@ -4,3 +4,10 @@ from dataclasses import dataclass
 @dataclass
 class DataIngestionArtifact:
     subtitles_dir: str
+    transcripts_file_path: str
+    jutsus_file_path: str
+
+@dataclass
+class DataValidationArtifact:
+    validation_status: bool
+    validation_status_file_path: str
