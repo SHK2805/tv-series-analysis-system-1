@@ -3,3 +3,5 @@ typing-extensions
 python-dotenv
 pathlib
 requests
+scrapy
+beautifulsoup4

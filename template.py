@@ -38,6 +38,9 @@ def create_project_structure(project_name: str) -> bool:
             "env_config/__init__.py",
             "env_config/env_manager.py",
             "env_config/set_config.py",
+            # crawler
+            f"crawler/__init__.py",
+            f"crawler/jutsu_crawler.py",
             # logs
             f"logs/",
             # data folder

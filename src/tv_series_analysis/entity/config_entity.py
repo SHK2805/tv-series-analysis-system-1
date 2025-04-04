@@ -1,7 +1,8 @@
 import os
 from src.tv_series_analysis.config.configuration import TrainingPipelineConfig
 from src.tv_series_analysis.constants import (data_ingestion_subtitles_dir_name,
-                                              data_ingestion_subtitles_url)
+                                              data_ingestion_subtitles_url, data_ingestion_kaggle_transcripts_name,
+                                              data_ingestion_transcripts_dir_name)
 
 
 class DataIngestionConfig:
@@ -11,4 +12,8 @@ class DataIngestionConfig:
         self.data_ingestion_subtitles_url = data_ingestion_subtitles_url
         self.data_ingestion_subtitles_dir = os.path.join(
             self.data_ingestion_dir, data_ingestion_subtitles_dir_name
+        )
+        self.data_ingestion_kaggle_transcripts_name = data_ingestion_kaggle_transcripts_name
+        self.data_ingestion_transcripts_dir_name: str = os.path.join(
+            self.data_ingestion_dir, data_ingestion_transcripts_dir_name
         )

@@ -1,5 +1,6 @@
 import sys
-from config.set_config import Config
+
+from env_config.set_config import Config
 from src.tv_series_analysis.entity.artifact_entity import DataIngestionArtifact
 from src.tv_series_analysis.exception.exception import CustomException
 from src.tv_series_analysis.logging.logger import logger
