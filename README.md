@@ -64,4 +64,16 @@ Dialogue: 0,0:00:05.95,0:00:11.99,Default,,0000,0000,0000,,<text>
 Dialogue: 0,0:00:11.99,0:00:17.99,Default,,0000,0000,0000,,<text>
 ```
 * The text is in the last part of the line that we need to extract.
-* We use regex and python to extract the text from the subtitles.
+
+##### Steps
+* Use regex and python to extract the text lines from the subtitle files.
+* Replace the character "\N" with a space.
+* Concatenate all the lines into a single line.
+* Use a pattern to extract the episode number from the file name.
+* Create a pandas dataframe with the columns:
+  * `episode`
+  * `script`
+* Save the dataframe to a csv file.
+* The data is now passed through a sentence tokenizer to split the text into sentences.
+* The tokenized sentences are added as a column to the dataframe.
+* The dataframe is saved to a csv file.

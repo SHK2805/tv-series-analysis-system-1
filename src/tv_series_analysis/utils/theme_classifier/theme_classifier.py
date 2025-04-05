@@ -10,7 +10,8 @@ from src.tv_series_analysis.logging.logger import logger
 
 
 class ThemeClassifier:
-    def __init__(self, task: str = "zero-shot-classification", model: str = "facebook/bart-large-mnli"):
+    def __init__(self, task: str = "zero-shot-classification",
+                 model: str = "facebook/bart-large-mnli"):
         self.class_name = self.__class__.__name__
         try:
             nltk.download("punkt")
