@@ -15,6 +15,7 @@ class DataValidationArtifact:
 @dataclass
 class DataTransformationArtifact:
     transformed_subtitles_file_path: str
+    tokenized_subtitles_file_path: str
 
 @dataclass
 class DataProcessorArtifact:

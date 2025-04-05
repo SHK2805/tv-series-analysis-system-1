@@ -27,7 +27,6 @@ data_validation_status_file_name: str = "status.txt"
 
 # DATA TRANSFORMATION CONSTANTS
 data_transformation_dir_name: str = "data_transformation"
-data_transformation_transformed_subtitles_folder: str = "transformed_subtitles"
 data_transformation_transformed_subtitles_file_name: str = "transformed_subtitles.csv"
 data_transformation_tokenized_subtitles_file_name: str = "tokenized_subtitles.csv"
 

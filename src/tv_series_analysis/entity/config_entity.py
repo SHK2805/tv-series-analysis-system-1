@@ -7,9 +7,9 @@ from src.tv_series_analysis.constants import (subtitles_dir_name,
                                               data_validation_status_file_name, subtitles_file_count,
                                               transcripts_file_name, jutsus_file_name, data_folder_name,
                                               data_transformation_dir_name,
-                                              data_transformation_transformed_subtitles_folder,
                                               data_transformation_transformed_subtitles_file_name,
                                               data_processor_file_name, data_processor_batch_size,
+                                              data_transformation_tokenized_subtitles_file_name,
                                               )
 
 
@@ -53,8 +53,9 @@ class DataTransformationConfig:
         self.jutsus_file_path = os.path.join(self.data_dir, jutsus_dir_name, jutsus_file_name)
         # transformed subtitles
         self.transformed_subtitles_file_path = os.path.join(self.data_transformation_dir,
-                                                            data_transformation_transformed_subtitles_folder,
                                                             data_transformation_transformed_subtitles_file_name)
+        self.tokenized_subtitles_file_name = os.path.join(self.data_transformation_dir,
+                                                            data_transformation_tokenized_subtitles_file_name)
 
 class DataProcessorConfig:
     def __init__(self, config: TrainingPipelineConfig):

@@ -38,7 +38,7 @@ class DataTransformation:
             logger.error(message)
             raise CustomException(message, sys)
 
-    def tokenize_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def tokenize_data(self, df: pd.DataFrame) -> str:
         tag: str = f"[{self.class_name}]::[tokenize_data]"
         try:
             logger.info(f"{tag}::started.")
@@ -50,15 +50,23 @@ class DataTransformation:
                 logger.error(message)
                 raise ValueError(message)
             df['tokenized_script'] = df['script'].apply(sent_tokenize)
+            # Save the tokenized data to a CSV file
+            # create the tokenized subtitles directory if it doesn't exist
+            tokenized_subtitles_dir_path = os.path.dirname(self.data_transformation_config.tokenized_subtitles_file_name)
+            os.makedirs(tokenized_subtitles_dir_path, exist_ok=True)
+            logger.info(f"{tag}::Tokenized subtitles directory created at {tokenized_subtitles_dir_path}")
+            # save the tokenized data to a csv file
+            df.to_csv(self.data_transformation_config.tokenized_subtitles_file_name, index=False)
+            logger.info(f"{tag}::tokenized data saved to {self.data_transformation_config.tokenized_subtitles_file_name}")
             logger.info(f"{tag}::tokenization complete.")
             logger.info(f"{tag}::complete.")
-            return df
+            return self.data_transformation_config.tokenized_subtitles_file_name
         except Exception as e:
             message: str = f"{tag}::Error occurred: {e}"
             logger.error(message)
             raise CustomException(message, sys)
 
-    def transform_subtitles(self, subtitles_files: list[str]) -> str:
+    def transform_subtitles(self, subtitles_files: list[str]) -> tuple[str, pd.DataFrame]:
         tag: str = f"[{self.class_name}]::[transform_subtitles]"
         try:
             logger.info(f"{tag}::started.")
@@ -95,7 +103,7 @@ class DataTransformation:
             logger.info(f"{tag}::Transformed subtitles directory created at {transformed_subtitles_dir_path}")
             df.to_csv(self.data_transformation_config.transformed_subtitles_file_path, index=False)
             logger.info(f"{tag}::complete.")
-            return self.data_transformation_config.transformed_subtitles_file_path
+            return self.data_transformation_config.transformed_subtitles_file_path, df
         except Exception as e:
             message: str = f"{tag}::Error occurred: {e}"
             logger.error(message)
@@ -111,9 +119,12 @@ class DataTransformation:
             subtitles_files = self.get_subtitles_filenames()
             # print(subtitles_files)
             # transform the subtitle data
-            transformed_subtitles_file_path = self.transform_subtitles(subtitles_files)
+            transformed_subtitles_file_path, transformed_subtitles_df = self.transform_subtitles(subtitles_files)
+            # tokenize the transformed data
+            tokenized_subtitles_file_path =  self.tokenize_data(transformed_subtitles_df)
             logger.info(f"{tag}::complete.")
-            return DataTransformationArtifact(transformed_subtitles_file_path)
+            return DataTransformationArtifact(transformed_subtitles_file_path,
+                                              tokenized_subtitles_file_path)
         except Exception as e:
             message: str = f"{tag}::Error occurred: {e}"
             logger.error(message)

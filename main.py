@@ -1,15 +1,14 @@
 import sys
+
 from env_config.set_config import Config
 from src.tv_series_analysis.entity.artifact_entity import (DataIngestionArtifact,
                                                            DataValidationArtifact,
-                                                           DataTransformationArtifact,
-                                                           DataProcessorArtifact)
-from src.tv_series_analysis.pipeline.data_ingestion import DataIngestionTrainingPipeline
-from src.tv_series_analysis.pipeline.data_processor import DataProcessorTrainingPipeline
-from src.tv_series_analysis.pipeline.data_transformation import DataTransformationTrainingPipeline
-from src.tv_series_analysis.pipeline.data_validation import DataValidationTrainingPipeline
+                                                           DataTransformationArtifact)
 from src.tv_series_analysis.exception.exception import CustomException
 from src.tv_series_analysis.logging.logger import logger
+from src.tv_series_analysis.pipeline.data_ingestion import DataIngestionTrainingPipeline
+from src.tv_series_analysis.pipeline.data_transformation import DataTransformationTrainingPipeline
+from src.tv_series_analysis.pipeline.data_validation import DataValidationTrainingPipeline
 
 
 class RunPipeline:
@@ -63,23 +62,6 @@ class RunPipeline:
             logger.error(f"{tag}::Error running the data transformation pipeline: {e}")
             raise CustomException(e, sys)
 
-    def run_data_processor_pipeline(self, data_transformation_artifact: DataTransformationArtifact) -> DataProcessorArtifact:
-        tag: str = f"[{self.class_name}]::[run_data_processor_pipeline]::"
-        try:
-            data_processor_pipeline: DataProcessorTrainingPipeline = DataProcessorTrainingPipeline(
-                data_transformation_artifact)
-            logger.info(f"[STARTED]>>>>>>>>>>>>>>>>>>>> {data_processor_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<")
-            logger.info(f"{tag}::Running the data processor pipeline")
-            data_processor_artifact = data_processor_pipeline.data_processor()
-            logger.info(f"{tag}::Data processor pipeline completed")
-            logger.info(
-                f"[COMPLETE]>>>>>>>>>>>>>>>>>>>> {data_processor_pipeline.stage_name} <<<<<<<<<<<<<<<<<<<<\n\n\n")
-            return data_processor_artifact
-        except Exception as e:
-            logger.error(f"{tag}::Error running the data processor pipeline: {e}")
-            raise CustomException(e, sys)
-
-
     def run(self) -> None:
         data_ingestion_artifact: DataIngestionArtifact = self.run_data_ingestion_pipeline()
         # logger.info(f"Data Ingestion Artifact: {data_ingestion_artifact}")
@@ -87,8 +69,6 @@ class RunPipeline:
         # logger.info(f"Data Validation Artifact: {data_validation_artifact}")
         data_transformation_artifact: DataTransformationArtifact = self.run_data_transformation_pipeline(data_validation_artifact)
         # logger.info(f"Data Transformation Artifact: {data_transformation_artifact}")
-        data_processor_artifact: DataProcessorArtifact = self.run_data_processor_pipeline(data_transformation_artifact)
-
 
 if __name__ == "__main__":
     try:
