@@ -9,6 +9,7 @@ from src.tv_series_analysis.constants import (subtitles_dir_name,
                                               data_transformation_dir_name,
                                               data_transformation_transformed_subtitles_folder,
                                               data_transformation_transformed_subtitles_file_name,
+                                              data_processor_file_name, data_processor_batch_size,
                                               )
 
 
@@ -54,4 +55,13 @@ class DataTransformationConfig:
         self.transformed_subtitles_file_path = os.path.join(self.data_transformation_dir,
                                                             data_transformation_transformed_subtitles_folder,
                                                             data_transformation_transformed_subtitles_file_name)
+
+class DataProcessorConfig:
+    def __init__(self, config: TrainingPipelineConfig):
+        self.class_name = self.__class__.__name__
+        # folders
+        self.data_dir = data_folder_name
+        self.data_processor_dir = os.path.join(config.artifact_dir,data_transformation_dir_name)
+        self.data_processor_file_name = os.path.join(self.data_processor_dir,data_processor_file_name)
+        self.data_processor_batch_size = data_processor_batch_size
 

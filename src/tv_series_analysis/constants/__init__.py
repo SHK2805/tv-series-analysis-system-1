@@ -29,5 +29,11 @@ data_validation_status_file_name: str = "status.txt"
 data_transformation_dir_name: str = "data_transformation"
 data_transformation_transformed_subtitles_folder: str = "transformed_subtitles"
 data_transformation_transformed_subtitles_file_name: str = "transformed_subtitles.csv"
+data_transformation_tokenized_subtitles_file_name: str = "tokenized_subtitles.csv"
+
+# DATA PROCESSOR CONSTANTS
+data_processor_dir_name: str = "data_processor"
+data_processor_file_name: str = "processed_data.csv"
+data_processor_batch_size: int = 20
 
 

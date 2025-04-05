@@ -2,6 +2,9 @@ import os
 import sys
 import pandas as pd
 from glob import glob
+
+from nltk import sent_tokenize
+
 from src.tv_series_analysis.entity.artifact_entity import DataValidationArtifact, DataTransformationArtifact
 from src.tv_series_analysis.entity.config_entity import DataTransformationConfig
 from src.tv_series_analysis.exception.exception import CustomException
@@ -35,6 +38,26 @@ class DataTransformation:
             logger.error(message)
             raise CustomException(message, sys)
 
+    def tokenize_data(self, df: pd.DataFrame) -> pd.DataFrame:
+        tag: str = f"[{self.class_name}]::[tokenize_data]"
+        try:
+            logger.info(f"{tag}::started.")
+            # Placeholder for batch tokenization
+            # Assuming df has a column named 'script' that needs to be tokenized
+            # Apply sent_tokenize to the 'script' column
+            if 'script' not in df.columns:
+                message: str = f"Column 'script' not found in DataFrame"
+                logger.error(message)
+                raise ValueError(message)
+            df['tokenized_script'] = df['script'].apply(sent_tokenize)
+            logger.info(f"{tag}::tokenization complete.")
+            logger.info(f"{tag}::complete.")
+            return df
+        except Exception as e:
+            message: str = f"{tag}::Error occurred: {e}"
+            logger.error(message)
+            raise CustomException(message, sys)
+
     def transform_subtitles(self, subtitles_files: list[str]) -> str:
         tag: str = f"[{self.class_name}]::[transform_subtitles]"
         try:
@@ -55,7 +78,7 @@ class DataTransformation:
                     # lines = [",".join(line.split(",")[9:]) for line in lines if line.startswith("Dialogue:")]
                     # Extract the text portion using regex
                     lines = [extract_text_with_pattern(line) for line in lines]
-                # there are some \N characters in the text. Replace that with space
+                # There are some \N characters in the text. Replace that with space
                 lines = [line.replace("\\N", " ") for line in lines]
                 # join the lines into a single string in batch of 10
                 scripts.append(" ".join(lines))
