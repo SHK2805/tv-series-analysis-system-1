@@ -5,7 +5,7 @@ from src.tv_series_analysis.entity.artifact_entity import DataTransformationArti
 from src.tv_series_analysis.entity.config_entity import ModelTrainerConfig
 from src.tv_series_analysis.exception.exception import CustomException
 from src.tv_series_analysis.logging.logger import logger
-from src.tv_series_analysis.utils.utils import get_columns_from_yaml, validate_columns
+from src.tv_series_analysis.utils.utils import get_columns_from_yaml, validate_columns, create_batches
 
 
 class ModelTrainer:
@@ -37,6 +37,17 @@ class ModelTrainer:
             logger.error(message)
             raise CustomException(message, sys)
 
+    def create_batches(self) -> list[str]:
+        tag: str = f"[{self.class_name}]::[create_batches]"
+        try:
+            return create_batches(self.data_transformation_artifact.tokenized_subtitles_file_path,
+                                  self.model_trainer_config.target_column,
+                                  self.model_trainer_config.batch_size)
+        except Exception as e:
+            message:str = f"{tag}::Error creating batches: {str(e)}"
+            logger.error(message)
+            raise CustomException(message, sys)
+
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
         tag: str = f"[{self.class_name}]::[initiate_model_trainer]"
         try:
@@ -47,6 +58,11 @@ class ModelTrainer:
                 message: str = f"{tag}::Dataframe schema does not match the required schema"
                 logger.error(message)
                 raise ValueError(message)
+
+            # Create batches
+            batches = self.create_batches()
+            logger.info(f"{tag}::Batches created successfully")
+            # print(f"{tag}::Batches:\n{batches[:2]}")  # Print the batch for debugging
             logger.info(f"{tag}::Complete model training")
             return ModelTrainerArtifact("trained_model.pkl")
         except Exception as e:

@@ -9,7 +9,8 @@ from src.tv_series_analysis.constants import (subtitles_dir_name,
                                               data_transformation_dir_name,
                                               data_transformation_transformed_subtitles_file_name,
                                               data_transformation_tokenized_subtitles_file_name, model_trainer_dir_name,
-                                              model_trainer_schema_file_path,
+                                              model_trainer_schema_file_path, model_trainer_batch_size,
+                                              model_trainer_target_column,
                                               )
 
 
@@ -64,4 +65,6 @@ class ModelTrainerConfig:
         # folders
         self.model_trainer_dir = os.path.join(config.artifact_dir, model_trainer_dir_name)
         self.schema_file_path = model_trainer_schema_file_path
+        self.batch_size = model_trainer_batch_size
+        self.target_column = model_trainer_target_column
 

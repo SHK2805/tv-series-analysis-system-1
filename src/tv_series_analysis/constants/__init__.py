@@ -34,4 +34,6 @@ data_transformation_tokenized_subtitles_file_name: str = "tokenized_subtitles.cs
 # MODEL TRAINER CONSTANTS
 model_trainer_dir_name: str = "model_trainer"
 model_trainer_schema_file_path: str = "data_schema/schema.yaml"
+model_trainer_batch_size: int = 20
+model_trainer_target_column: str = "tokenized_script"
 
