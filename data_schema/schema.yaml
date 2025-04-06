@@ -1,0 +1,4 @@
+columns:
+  - episode
+  - script
+  - tokenized_script

@@ -33,6 +33,8 @@ def create_project_structure(project_name: str) -> bool:
             ".gitignore",
             "requirements.txt",
             "README.md",
+            # schema
+            "data_schema/schema.yaml",
             # env config
             ".env",
             "env_config/__init__.py",
@@ -77,13 +79,13 @@ def create_project_structure(project_name: str) -> bool:
             f"src/{project_name}/components/data_ingestion.py",
             f"src/{project_name}/components/data_validation.py",
             f"src/{project_name}/components/data_transformation.py",
-            f"src/{project_name}/components/data_processor.py",
+            f"src/{project_name}/components/model_trainer.py",
             # pipeline
             f"src/{project_name}/pipeline/__init__.py",
             f"src/{project_name}/pipeline/data_ingestion.py",
             f"src/{project_name}/pipeline/data_validation.py",
             f"src/{project_name}/pipeline/data_transformation.py",
-            f"src/{project_name}/pipeline/data_processor.py",
+            f"src/{project_name}/pipeline/model_trainer.py",
             # main
             "main.py",
             # clean

@@ -18,5 +18,5 @@ class DataTransformationArtifact:
     tokenized_subtitles_file_path: str
 
 @dataclass
-class DataProcessorArtifact:
-    processed_file_path: str
+class ModelTrainerArtifact:
+    trained_model_file_path: str

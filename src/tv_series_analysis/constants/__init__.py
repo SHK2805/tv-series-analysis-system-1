@@ -14,6 +14,7 @@ transcripts_file_count: int = 1
 jutsus_dir_name: str = "jutsus"
 jutsus_file_name: str = "jutsus.jsonl"
 jutsus_file_count: int = 1
+schema_yaml_file_path: str = "data_schema/schema.yaml"
 
 
 
@@ -30,9 +31,7 @@ data_transformation_dir_name: str = "data_transformation"
 data_transformation_transformed_subtitles_file_name: str = "transformed_subtitles.csv"
 data_transformation_tokenized_subtitles_file_name: str = "tokenized_subtitles.csv"
 
-# DATA PROCESSOR CONSTANTS
-data_processor_dir_name: str = "data_processor"
-data_processor_file_name: str = "processed_data.csv"
-data_processor_batch_size: int = 20
-
+# MODEL TRAINER CONSTANTS
+model_trainer_dir_name: str = "model_trainer"
+model_trainer_schema_file_path: str = "data_schema/schema.yaml"
 

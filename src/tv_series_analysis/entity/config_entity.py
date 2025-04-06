@@ -8,8 +8,8 @@ from src.tv_series_analysis.constants import (subtitles_dir_name,
                                               transcripts_file_name, jutsus_file_name, data_folder_name,
                                               data_transformation_dir_name,
                                               data_transformation_transformed_subtitles_file_name,
-                                              data_processor_file_name, data_processor_batch_size,
-                                              data_transformation_tokenized_subtitles_file_name,
+                                              data_transformation_tokenized_subtitles_file_name, model_trainer_dir_name,
+                                              model_trainer_schema_file_path,
                                               )
 
 
@@ -57,12 +57,11 @@ class DataTransformationConfig:
         self.tokenized_subtitles_file_name = os.path.join(self.data_transformation_dir,
                                                             data_transformation_tokenized_subtitles_file_name)
 
-class DataProcessorConfig:
+
+class ModelTrainerConfig:
     def __init__(self, config: TrainingPipelineConfig):
         self.class_name = self.__class__.__name__
         # folders
-        self.data_dir = data_folder_name
-        self.data_processor_dir = os.path.join(config.artifact_dir,data_transformation_dir_name)
-        self.data_processor_file_name = os.path.join(self.data_processor_dir,data_processor_file_name)
-        self.data_processor_batch_size = data_processor_batch_size
+        self.model_trainer_dir = os.path.join(config.artifact_dir, model_trainer_dir_name)
+        self.schema_file_path = model_trainer_schema_file_path
 
