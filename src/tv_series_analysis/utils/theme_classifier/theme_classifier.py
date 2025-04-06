@@ -16,30 +16,30 @@ class ThemeClassifier:
         try:
             nltk.download("punkt")
             self.device = 0 if torch.cuda.is_available() else -1
-            logger.info(f"{self.class_name}::Device set to {self.device}")
+            logger.info(f"[{self.class_name}]::Device set to {self.device}")
 
             if task != "zero-shot-classification":
-                message = f"{self.class_name}::Invalid task '{task}'. Only 'zero-shot-classification' is supported."
+                message = f"[{self.class_name}]::Invalid task '{task}'. Only 'zero-shot-classification' is supported."
                 logger.error(message)
                 raise ValueError(message)
             self.task = task
 
             if model != "facebook/bart-large-mnli":
-                message = f"{self.class_name}::Invalid model '{model}'. Only 'facebook/bart-large-mnli' is supported."
+                message = f"[{self.class_name}]::Invalid model '{model}'. Only 'facebook/bart-large-mnli' is supported."
                 logger.error(message)
                 raise ValueError(message)
             self.model = model
 
             # Initialize the zero-shot classification pipeline
             # with the specified model and device
-            logger.info(f"{self.class_name}::Initializing zero-shot classification pipeline...")
+            logger.info(f"[{self.class_name}]::Initializing zero-shot classification pipeline...")
             self.theme_classifier = pipeline(
                 task=self.task,
                 model=self.model,
                 device=self.device
             )
         except Exception as e:
-            message = f"{self.class_name}::Failed to initialize zero-shot classification pipeline: {e}"
+            message = f"[{self.class_name}]::Failed to initialize zero-shot classification pipeline: {e}"
             logger.error(message)
             raise CustomException(message, sys)
 

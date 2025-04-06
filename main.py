@@ -65,7 +65,7 @@ class RunPipeline:
 
     def run_model_trainer_pipeline(self,
                                    data_transformation_artifact: DataTransformationArtifact) -> ModelTrainerArtifact:
-        tag: str = f"{self.class_name}::run_model_trainer_pipeline::"
+        tag: str = f"[{self.class_name}]::[run_model_trainer_pipeline]"
         try:
             model_trainer_pipeline: ModelTrainerTrainingPipeline = ModelTrainerTrainingPipeline(
                 data_transformation_artifact)

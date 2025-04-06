@@ -38,13 +38,13 @@ class ModelTrainer:
             raise CustomException(message, sys)
 
     def initiate_model_trainer(self) -> ModelTrainerArtifact:
-        tag: str = f"{self.class_name}::initiate_model_trainer"
+        tag: str = f"[{self.class_name}]::[initiate_model_trainer]"
         try:
             logger.info(f"{tag}::Initiating model training")
             df = pd.read_csv(self.data_transformation_artifact.tokenized_subtitles_file_path)
             # Validate data columns
             if not self.validate_data_columns(df):
-                message: str = f"Dataframe schema does not match the required schema"
+                message: str = f"{tag}::Dataframe schema does not match the required schema"
                 logger.error(message)
                 raise ValueError(message)
             logger.info(f"{tag}::Complete model training")

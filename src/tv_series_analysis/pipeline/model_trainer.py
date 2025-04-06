@@ -15,7 +15,7 @@ class ModelTrainerTrainingPipeline:
         self.data_transformation_artifact = data_transformation_artifact
 
     def train_model(self):
-        tag: str = f"{self.class_name}::train_model::"
+        tag: str = f"[{self.class_name}]::[train_model]::"
         try:
             logger.info(f"{tag}::Training model")
             config: TrainingPipelineConfig = TrainingPipelineConfig()
