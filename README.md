@@ -2,11 +2,22 @@
 
 ### Dataset
 * For this project, we need to choose a TV series dataset.
-* We need the below from the dataset
-  * A sub-titles dataset
-  * A transcript dataset
-  * A classification dataset
 * In this project, we are choosing the TV series "Naruto" dataset.
+* We need the below from the datasets:
+* 
+##### Subtitles
+* In the subtitle dataset there are just the dialogues 
+* We do not know who said the dialogue
+* This is used to build the **Character Network** and **Theme Classification**
+
+##### Transcript
+* This has the dialogues and the character who said it
+* This is used for the **chatbot**
+
+##### Classification
+* This has the classification of the attacks
+* This is used for the **attack classification**
+* This dataset is downloaded by crawling through the webpages using the `scrapy` crawler in the `utils/crawler/` folder.
 
 #### [Scrapy](https://scrapy.org/)
 * Scrapy is a web crawling and web scraping framework for Python.
@@ -16,6 +27,9 @@
 pip install scrapy
 ```
 * The code for the crawlers is in the folder `utils/crawler/`
+* We use [Jutsu](https://naruto.fandom.com/wiki/Special:BrowseData/Jutsu?limit=250&offset=0&_cat=Jutsu) for classification
+* We open the page using scrapy and extract the `title`, `description` and the `classification` of the jutsu.
+* The extracted data is put into a structured format and saved to a jsonl file.
 
 ### Steps
 #### Coding steps
